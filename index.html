@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Bootstrap 4 Paging System Example</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/minty/bootstrap.min.css">
+        <style>
+body { background-color: #fafafa; }
+            .disabled {
+                pointer-events: none;
+            }
+			.hide {display:none!important}
+        header { margin-top: 150px; }
+        </style>
+
+        <!-- Load jQuery library script from CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- Load Bootstrap3 library script from CDN -->
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+
+        <!-- Load our pagination script from local source -->
+        <script src="pagination.js?v3"></script>
+    </head>
+    <body><div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/other/paging-system-bootstrap.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul><div id="carbon-block"></div>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+        <header>
+            <div class="container">
+                <div class="row">
+                        <h1>Bootstrap 4 Paging System Example</h1>
+                        <h4>Show/Hide items and paginate after loading all</h4>
+                </div>
+            </div>
+        </header>
+        <section>
+            <div class="container">
+						<table class="table table-bordered table-striped">
+  <thead>
+    <tr><th scope="col">#</th>
+      <th scope="col">Song</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-row">
+      <th scope="row">{count}</th>
+      <td>{song}</td>
+      <td>{artist}</td>
+      <td>{year}</td>
+    </tr>
+  </tbody>
+
+</table>
+                        <div class="text-center">
+                            <!-- parent element for pagination menu list -->
+                            <ul class="pagination custom-pagination"></ul>
+
+                            <!-- prepare necessary element attributes to pass parameters for pagination -->
+                            <input type="hidden" id="itemCount" value="">
+                            <input type="hidden" id="pageLimit" value="10">
+                        </div>
+            </div>
+        </section>
+        <footer>
+            <script>
+                $(document).ready(function () {
+                    readTextFile("data.json", function (text) {
+                        let data = JSON.parse(text);
+                        let pHtml = '<tr class="table-row">' + $('.table-row').html() + '</tr>';
+                        let nHtml = '';
+                        $('.table-row').remove();
+                        $('#itemCount').val(data.length);
+                        data.forEach(function (v, i) {
+                            let res = pHtml.replace("{count}", i + 1);
+                            res = res.replace("{song}", v.song);
+                            res = res.replace("{artist}", v.artist);
+                            res = res.replace("{year}", v.year);
+                            nHtml += res;
+                        });
+
+
+                        $('thead').after(nHtml);
+
+                        setTimeout(function () {
+                            $('.custom-pagination').rpmPagination({
+                                limit: parseInt($('#pageLimit').val()),
+                                total: parseInt($('#itemCount').val()),
+                                domElement: '.table-row'
+                            });
+                        }, 100);
+                    });
+
+
+                });
+
+                function readTextFile(file, callback) {
+                    var rawFile = new XMLHttpRequest();
+                    rawFile.overrideMimeType("application/json");
+                    rawFile.open("GET", file, true);
+                    rawFile.onreadystatechange = function () {
+                        if (rawFile.readyState === 4 && rawFile.status == "200") {
+                            callback(rawFile.responseText);
+                        }
+                    }
+                    rawFile.send(null);
+                }
+            </script>
+        </footer>
+        <script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+        <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+    </body>
+</html>
