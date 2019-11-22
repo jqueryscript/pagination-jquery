@@ -2,7 +2,7 @@
  * jquery-rpmPagination - v2.0
  * A jQuery plugin for simple dynamic frontend pagination with Bootstrap CSS
  * https://github.com/sabbir-rupom/pagination-jquery
- *  
+ *
  * Copyright 2019, Sabbir Hossain Rupom
  */
 
@@ -11,27 +11,27 @@
     "use strict";
     /**
      * Plugin root function rpmPagination()
-     * 
+     *
      * @param object options Option parameter for intializing pagination plugin
-     * *-----* {property} limit         Pagination item limit, [ optional ] default is 10 
+     * *-----* {property} limit         Pagination item limit, [ optional ] default is 10
      * *-----* {property} total         Pagination item count in total [ optional ]
-     * *-----* {property} currentPage   Current/Active page number of pagination  
-     * *-----* {property} domElement    Html element [tag/class] which will be count as Pagination item 
+     * *-----* {property} currentPage   Current/Active page number of pagination
+     * *-----* {property} domElement    Html element [tag/class] which will be count as Pagination item
      * *-------------------------------[ must be provided for dynamic pagination without page refresh, optional otherwise ]
      * *-----* {property} refresh       Page refresh flag, if enabled- page will be refreshed with query/get/post parameters [ optional ]
      * *-----* {property} link          Page refresh link [ must be provided if refresh flag is enabled, optional otherwise ]
      * *-----* {property} formElement   Pagination item filter form identity element [ optional ]
      * *-------------------------------[ If page has custom item search filter form, the pagination function will use the form to refresh the page with limit/offset parameters ]
-     * 
+     *
      * @returns boolean true
      */
-    
+
     var bsVersion = 3;
     if(typeof $.fn.tooltip !== 'undefined') {
         bsVersion = $.fn.tooltip.Constructor.VERSION.split('.')[0];
-    } 
-    var rpmListClass = 'page-num',
-            rpmAnchorClass = '', rpmHideClass = 'hide';
+    }
+    var rpmListClass = 'page-item',
+            rpmAnchorClass = 'page-link', rpmHideClass = 'hide';
 
     $.fn.rpmPagination = function (options) {
         var settings = $.extend({
@@ -75,7 +75,7 @@
 
         preparePageMenus(settings.currentPage, pages, $this);
 
-        [settings.currentPage, rpmPageNext] = preparePageItems(settings.currentPage, rpmPageNext, settings.limit, rpmCustomDomElem, 'page-num');
+        [settings.currentPage, rpmPageNext] = preparePageItems(settings.currentPage, rpmPageNext, settings.limit, rpmCustomDomElem, 'page-item');
 
         if (settings.refresh && $('.' + rpmCustomDomElem).length > 0) {
             $('.' + rpmCustomDomElem).removeClass(rpmHideClass)
@@ -84,7 +84,7 @@
         /**
          * Process html pagination on pagination-menu click
          */
-        $(document).on('click', '.page-num > a', function (e) {
+        $(document).on('click', '.page-item > a', function (e) {
             e.preventDefault();
 
             if ($(this).parent().hasClass('disabled') || $(this).parent($this).length === 0) {
@@ -100,7 +100,7 @@
                     } else {
                         let cl = $(this).data('page_no');
                         settings.currentPage = parseInt(cl);
-                        [settings.currentPage, rpmPageNext] = preparePageItems(settings.currentPage, rpmPageNext, settings.limit, rpmCustomDomElem, 'page-num');
+                        [settings.currentPage, rpmPageNext] = preparePageItems(settings.currentPage, rpmPageNext, settings.limit, rpmCustomDomElem, 'page-item');
                     }
                 }
 
@@ -113,12 +113,12 @@
     };
 
     /**
-     * 
+     *
      * @param {obj} obj Pagination item anchor object
      * @param {int} current Current page number
      * @param {int} limit Pagination item limit
      * @param {string} url Custom source url for passing query parameters
-     * @param {string} form Query-Element-String to determined existing form 
+     * @param {string} form Query-Element-String to determined existing form
      * @returns {} nothing
      */
     function refreshPageforItems(obj, current, limit, url, form) {
@@ -155,7 +155,7 @@
 
     /**
      * Show / Hide pagination items based on current page-menu
-     * 
+     *
      * @param {num} current_page Current page number
      * @param {num} next Number of next pagination item
      * @param {num} limit Pagination item limit to show in frontend
@@ -184,7 +184,7 @@
                 $('.' + element + '-' + i).removeClass(rpmHideClass);
             }
             current_page++;
-        } else if (type === 'page-num') {
+        } else if (type === 'page-item') {
             current = (limit * (current_page - 1)) + 1;
             next = (limit * (current_page - 1)) + limit;
             for (let i = current; i <= next; i++) {
@@ -197,7 +197,7 @@
 
     /**
      * Rearrage pagination menu after each pagination item list transition
-     * 
+     *
      * @param {num} current_page
      * @param {num} pages
      * @param {string} element
