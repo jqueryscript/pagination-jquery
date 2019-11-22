@@ -1,4 +1,6 @@
-# Simple Pagination Plugin in jQuery / Bootstrap [ V2.0 ]
+# Simple Pagination Plugin in jQuery / Bootstrap 4
+
+Forked from https://github.com/sabbir-rupom/pagination-jquery
 
 ## Getting Started
 
