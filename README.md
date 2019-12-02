@@ -1,5 +1,7 @@
 # Simple Pagination Plugin in jQuery / Bootstrap 4
 
+A simple, dynamic, Bootstrap based paging system that provides a convenient pagination control for tabular data and/or long lists.
+
 Forked from https://github.com/sabbir-rupom/pagination-jquery
 
 ## Getting Started
