@@ -4,6 +4,8 @@ A simple, dynamic, Bootstrap based paging system that provides a convenient pagi
 
 Forked from https://github.com/sabbir-rupom/pagination-jquery
 
+ ![Bootstrap 4 Pagination](https://github.com/jqueryscript/pagination-jquery/blob/master/paging-system-bootstrap.jpg)
+
 ## Getting Started
 
 In various front-end application developers intend to paginate tabular data / data list in their own custom way.
